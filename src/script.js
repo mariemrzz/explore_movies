@@ -2,16 +2,14 @@
 
 import { populateGenreDropdown, getSelectedGenre, getRandomMovie, displayMovie, clearCurrentMovie } from './helpers.js'
 
-const tmdbKey = '';
-const tmdbBaseUrl = 'https://api.themoviedb.org/3';
+const tmdbBaseUrl = 'https://api-movies.mariemrzz.site/3';
 const playBtn = document.getElementById('playBtn');
 const likeBtn = document.getElementById('likeBtn');
 const dislikeBtn = document.getElementById('dislikeBtn');
 
 const getGenres = async () => {
     const genreRequestEndpoint = '/genre/movie/list'
-    const requestParams = `?api_key=${tmdbKey}`
-    const urlToFetch = `${tmdbBaseUrl}${genreRequestEndpoint}${requestParams}`
+    const urlToFetch = `${tmdbBaseUrl}${genreRequestEndpoint}`
     try {
         const response = await fetch(urlToFetch)
         if (response.ok) {
@@ -28,7 +26,7 @@ const getGenres = async () => {
 const getMovies = async () => {
     const selectedGenre = getSelectedGenre();
     const discoverMovieEndpoint = '/discover/movie'
-    const requestParams = `?api_key=${tmdbKey}&with_genres=${selectedGenre}`
+    const requestParams = `?with_genres=${selectedGenre}`
     const urlToFetch = `${tmdbBaseUrl}${discoverMovieEndpoint}${requestParams}`
     try {
         const response = await fetch(urlToFetch)
@@ -47,8 +45,7 @@ const getMovies = async () => {
 const getMovieInfo = async (movie) => {
     const movieId = movie.id
     const movieEndpoint = `/movie/${movieId}`
-    const requestParams = `?api_key=${tmdbKey}`
-    const urlToFetch = `${tmdbBaseUrl}${movieEndpoint}${requestParams}`
+    const urlToFetch = `${tmdbBaseUrl}${movieEndpoint}`
     try {
         const response = await fetch(urlToFetch)
         if (response.ok) {
