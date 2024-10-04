@@ -18,5 +18,6 @@ jobs:
           folder: src
           bucket: ${{ secrets.S3_BUCKET }}
           bucket-region: ${{ secrets.S3_BUCKET_REGION }}
+          private: true
           delete-removed: true
           files-to-include: '{.*/**,**}'
