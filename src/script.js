@@ -6,6 +6,7 @@ const tmdbBaseUrl = 'https://api-movies.mariemrzz.site/3';
 const playBtn = document.getElementById('playBtn');
 const likeBtn = document.getElementById('likeBtn');
 const dislikeBtn = document.getElementById('dislikeBtn');
+const genreSelect = document.getElementById('genres');
 
 const getGenres = async () => {
     const genreRequestEndpoint = '/genre/movie/list'
@@ -85,6 +86,7 @@ const dislikeMovie = () => {
 
 getGenres().then(populateGenreDropdown);
 playBtn.onclick = showRandomMovie;
+genreSelect.onchange = showRandomMovie;
 likeBtn.onclick = likeMovie;
 dislikeBtn.onclick = dislikeMovie;
 

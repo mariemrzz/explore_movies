@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Film Finder</title>
+    <title>Explore Movies</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -17,21 +17,21 @@
 
 <body>
     <header>
-        <h1 id="appTitle">🍿Film Finder🍿</h1>
+        <h1 id="appTitle" data-testid="appTitleId">🍿Explore Movies🍿</h1>
     </header>
     <form id="genreForm">
         <label>Choose a genre:</label>
-        <select name="genres" id="genres">
+        <select name="genres" id="genres" data-testid="genresId">
         </select>
     </form>
-    <button id="playBtn">Let's Play!</button>
+    <button id="playBtn">Search</button>
     <div id="movieInfo">
         <div id="moviePoster"></div>
         <div id="movieText"></div>
     </div>
     <div id="likeOrDislikeBtns" hidden>
-        <button id="likeBtn">👍<i class="fa-solid fa-thumbs-up"></i></button>
-        <button id="dislikeBtn">👎<i class="fa-solid fa-thumbs-down"></i></button>
+        <button id="likeBtn">👍</button>
+        <button id="dislikeBtn">👎</button>
     </div>
 </body>
 
