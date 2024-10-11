@@ -31,8 +31,7 @@ body {
 }
 
 #moviePoster,
-#movieText,
-#movieReleaseDate {
+#movieText {
     width: 50%;
     float: left;
 }
@@ -50,16 +49,19 @@ img#moviePoster {
     line-height: 1.25;
 }
 
-#movieReleaseDate {
+#movieImdbRating {
     font-family: 'Questrial';
     color: #FEFBEA;
     line-height: 1.25;
 }
 
-#movieTitle,
-#movieOverview,
-#movieReleaseDate {
-    padding: 32px;
+#movieText div {
+    padding-left: 32px;
+    padding-top: 8px;
+}
+
+#movieText h1 {
+    padding-top: 12px;
 }
 
 #playBtn {

@@ -43,31 +43,13 @@ const getMovies = async () => {
     }
 };
 
-const getMovieInfo = async (movie) => {
-    const movieId = movie.id
-    const movieEndpoint = `/movie/${movieId}`
-    const urlToFetch = `${tmdbBaseUrl}${movieEndpoint}`
-    try {
-        const response = await fetch(urlToFetch)
-        if (response.ok) {
-            const movieInfo = await response.json()
-            return movieInfo;
-        }
-    }
-    catch (error) {
-        console.log(error)
-    }
-};
-
 // Gets a list of movies and ultimately displays the info of a random movie from the list
 const showRandomMovie = async () => {
     const movies = await getMovies()
     const randomMovie = getRandomMovie(movies)
-    const info = await getMovieInfo(randomMovie)
     clearCurrentMovie();
-    displayMovie(info);
+    displayMovie(randomMovie);
 };
-
 
 // After liking a movie, clears the current movie from the screen and gets another random movie
 const likeMovie = () => {
@@ -89,5 +71,3 @@ playBtn.onclick = showRandomMovie;
 genreSelect.onchange = showRandomMovie;
 likeBtn.onclick = likeMovie;
 dislikeBtn.onclick = dislikeMovie;
-
-

@@ -1,3 +1,8 @@
+const moviePosterDiv = document.getElementById('moviePoster');
+const movieTitleDiv = document.getElementById('movieTitle');
+const movieRatingDiv = document.getElementById('movieImdbRating');
+const overviewTextDiv = document.getElementById('movieOverview');
+
 // Populate dropdown menu with all the available genres
 const populateGenreDropdown = (genres) => {
     const select = document.getElementById('genres')
@@ -13,6 +18,7 @@ const populateGenreDropdown = (genres) => {
 // Returns the current genre selection from the dropdown menu
 const getSelectedGenre = () => {
     const selectedGenre = document.getElementById('genres').value;
+
     return selectedGenre;
 };
 
@@ -25,10 +31,10 @@ const showBtns = () => {
 // Clear the current movie from the screen
 const clearCurrentMovie = (action = () => { }) => {
     action()
-    const moviePosterDiv = document.getElementById('moviePoster');
-    const movieTextDiv = document.getElementById('movieText');
     moviePosterDiv.innerHTML = '';
-    movieTextDiv.innerHTML = '';
+    movieTitleDiv.innerHTML = '';
+    movieRatingDiv.innerHTML = '';
+    overviewTextDiv.innerHTML = '';
 }
 
 // Create HTML for movie poster
@@ -46,8 +52,6 @@ const createMoviePoster = (posterPath) => {
 // Create HTML for movie title
 const createMovieTitle = (title) => {
     const titleHeader = document.createElement('h1');
-    titleHeader.setAttribute('id', 'movieTitle');
-    titleHeader.setAttribute('data-testid', 'movieTitleId');
     titleHeader.innerHTML = title;
 
     return titleHeader;
@@ -57,11 +61,21 @@ const createMovieTitle = (title) => {
 // Create HTML for movie overview
 const createMovieOverview = (overview) => {
     const overviewParagraph = document.createElement('p');
-    overviewParagraph.setAttribute('id', 'movieOverview');
-    overviewParagraph.setAttribute('data-testid', 'movieOverviewId');
-    overviewParagraph.innerHTML = overview;
+    if (overview.length === 0) {
+        overviewParagraph.innerHTML = " <b>Description: currently there is no description for this movie</b> "
+    } else {
+        overviewParagraph.innerHTML = " <b>Description:</b> " + overview;
+    }
 
     return overviewParagraph;
+};
+
+// Create HTML for movie imdb rating 
+const createMovieRating = (rating) => {
+    const ratingParagraph = document.createElement('p');
+    ratingParagraph.innerHTML = ' <i class="fa-brands fa-imdb fa-2xl" style="color: #FFD43B;"></i> ' + rating;
+
+    return ratingParagraph;
 };
 
 // Returns a random movie from the first page of movies
@@ -74,18 +88,18 @@ const getRandomMovie = (movies) => {
 
 // Uses the DOM to create HTML to display the movie
 const displayMovie = (movieInfo) => {
-    const moviePosterDiv = document.getElementById('moviePoster');
-    const movieTextDiv = document.getElementById('movieText');
 
     // Create HTML content containing movie info
     const moviePoster = createMoviePoster(movieInfo.poster_path);
     const titleHeader = createMovieTitle(`${movieInfo.title} (${movieInfo.release_date.slice(0, 4)})`);
     const overviewText = createMovieOverview(movieInfo.overview);
+    const movieRating = createMovieRating(`${movieInfo.vote_average.toString().slice(0, 3)}`);
 
-    // Append title, poster, and overview to page
+    // Append title, poster, rating, and overview to page
     moviePosterDiv.appendChild(moviePoster);
-    movieTextDiv.appendChild(titleHeader);
-    movieTextDiv.appendChild(overviewText);
+    movieTitleDiv.appendChild(titleHeader);
+    movieRatingDiv.appendChild(movieRating)
+    overviewTextDiv.appendChild(overviewText);
 
     showBtns();
 };
