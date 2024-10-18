@@ -1,6 +1,7 @@
 const moviePosterDiv = document.getElementById('moviePoster');
 const movieTitleDiv = document.getElementById('movieTitle');
-const movieRatingDiv = document.getElementById('movieImdbRating');
+const movieRatingContainer = document.getElementById('movieRatingContainer');
+const movieRating = document.getElementById('movieImdbRating');
 const overviewTextDiv = document.getElementById('movieOverview');
 
 // Populate dropdown menu with all the available genres
@@ -33,7 +34,7 @@ const clearCurrentMovie = (action = () => { }) => {
     action()
     moviePosterDiv.innerHTML = '';
     movieTitleDiv.innerHTML = '';
-    movieRatingDiv.innerHTML = '';
+    movieRating.innerHTML = '';
     overviewTextDiv.innerHTML = '';
 }
 
@@ -70,14 +71,6 @@ const createMovieOverview = (overview) => {
     return overviewParagraph;
 };
 
-// Create HTML for movie imdb rating 
-const createMovieRating = (rating) => {
-    const ratingParagraph = document.createElement('p');
-    ratingParagraph.innerHTML = ' <i class="fa-brands fa-imdb fa-2xl" style="color: #FFD43B;"></i> ' + rating;
-
-    return ratingParagraph;
-};
-
 // Returns a random movie from the first page of movies
 const getRandomMovie = (movies) => {
     const randomIndex = Math.floor(Math.random() * movies.length);
@@ -88,17 +81,18 @@ const getRandomMovie = (movies) => {
 
 // Uses the DOM to create HTML to display the movie
 const displayMovie = (movieInfo) => {
+    movieRatingContainer.style.visibility = '';
 
     // Create HTML content containing movie info
     const moviePoster = createMoviePoster(movieInfo.poster_path);
     const titleHeader = createMovieTitle(`${movieInfo.title} (${movieInfo.release_date.slice(0, 4)})`);
     const overviewText = createMovieOverview(movieInfo.overview);
-    const movieRating = createMovieRating(`${movieInfo.vote_average.toString().slice(0, 3)}`);
+    const movieRatingText = `${movieInfo.vote_average.toString().slice(0, 3)}`;
 
     // Append title, poster, rating, and overview to page
     moviePosterDiv.appendChild(moviePoster);
     movieTitleDiv.appendChild(titleHeader);
-    movieRatingDiv.appendChild(movieRating)
+    movieRating.innerHTML = movieRatingText;
     overviewTextDiv.appendChild(overviewText);
 
     showBtns();
